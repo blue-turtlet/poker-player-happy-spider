@@ -11,12 +11,19 @@ class Player {
     let score = me.score();
     const bettingPosition = game.bettingPosition();
     const totalNumber = game.playersCount();
-    let additionalScore = ( bettingPosition / totalNumber ) > 0.5 ? 10 : 5;
+    let additionalScore = ( bettingPosition / totalNumber ) > 0.5 ? 100 : 50;
     const bettingRound = game.bettingRound();
+    const multiplicatn = 1;
     if (bettingRound === "flop" || bettingRound === "turn" || bettingRound === "river") {
       score += additionalScore;
     }
-    bet(game.toRaiseByBlinds(score));
+    if (bettingRound === 'turn') {
+      multiplicatn = 2;
+    }
+    if (bettingRound === 'river') {
+      multiplicatn = 5;
+    }
+    bet(game.toRaiseByBlinds(score*multiplicatn));
   }
 
   static showdown(gameState) {
