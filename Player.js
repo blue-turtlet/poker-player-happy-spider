@@ -16,8 +16,7 @@ class Player {
     if (bettingRound === "flop" || bettingRound === "turn" || bettingRound === "river") {
       score += additionalScore;
     }
-    score = score * 100;
-    bet(score);
+    bet(game.toRaiseByBlinds(score));
   }
 
   static showdown(gameState) {
