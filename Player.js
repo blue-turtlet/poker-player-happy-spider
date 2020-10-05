@@ -8,13 +8,17 @@ class Player {
   static betRequest(gameState, bet) {
     var game = new GameState(gameState);
     const me = game.me();
-    let score = 0;
-    if (me.hasPocketPair()) {
-      score += 10;
-    }
-    const highestRank = me.highestPocketValue();
-    if (highestRank > 10) {
-      score += Math.round(highestRank/2);
+    let score = me.score();
+    const bettingPosition = game.bettingPosition();
+    const totalNumber = game.playersCount();
+    let additionalScore = ( bettingPosition / totalNumber ) > 0.5 ? 10 : 5;
+    switch (game.bettingRound()) {
+      case "flop":
+      case "turn":
+      case "river": {
+        score += additionalScore; 
+        break;
+      }
     }
     bet(score);
   }
