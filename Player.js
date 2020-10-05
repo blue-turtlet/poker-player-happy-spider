@@ -13,7 +13,7 @@ class Player {
     const totalNumber = game.playersCount();
     let additionalScore = ( bettingPosition / totalNumber ) > 0.5 ? 100 : 50;
     const bettingRound = game.bettingRound();
-    const multiplicatn = 1;
+    let multiplicatn = 1;
     if (bettingRound === "flop" || bettingRound === "turn" || bettingRound === "river") {
       score += additionalScore;
       if (bettingRound === 'turn') {
