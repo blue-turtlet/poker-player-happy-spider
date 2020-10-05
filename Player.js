@@ -16,13 +16,16 @@ class Player {
     const multiplicatn = 1;
     if (bettingRound === "flop" || bettingRound === "turn" || bettingRound === "river") {
       score += additionalScore;
+      if (bettingRound === 'turn') {
+        multiplicatn = 2;
+      }
+      if (bettingRound === 'river') {
+        multiplicatn = 5;
+      }
+    } else if (score < 9) {
+      multiplicatn = 0;
     }
-    if (bettingRound === 'turn') {
-      multiplicatn = 2;
-    }
-    if (bettingRound === 'river') {
-      multiplicatn = 5;
-    }
+    
     bet(game.toRaiseByBlinds(score*multiplicatn));
   }
 
