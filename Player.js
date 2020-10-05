@@ -12,6 +12,10 @@ class Player {
     const bettingPosition = game.bettingPosition();
     const totalNumber = game.playersCount();
     let additionalScore = ( bettingPosition / totalNumber ) > 0.5 ? 100 : 50;
+    let raise = false;
+    if ((bettingPosition === 1 || bettingPosition === 2) && score >=9) {
+      raise = true
+    }
     const bettingRound = game.bettingRound();
     let multiplicatn = 1;
     if (bettingRound === "flop" || bettingRound === "turn" || bettingRound === "river") {
@@ -25,8 +29,7 @@ class Player {
     } else if (score < 9) {
       multiplicatn = 0;
     }
-    
-    bet(game.toRaiseByBlinds(score)*multiplicatn);
+    bet(Math.min(score, game.minimumRaise()));
   }
 
   static showdown(gameState) {
@@ -34,4 +37,3 @@ class Player {
 }
 
 module.exports = Player;
-
