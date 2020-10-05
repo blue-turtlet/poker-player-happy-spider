@@ -26,7 +26,7 @@ class Player {
       multiplicatn = 0;
     }
     
-    bet(game.toRaiseByBlinds(score*multiplicatn));
+    bet(game.toRaiseByBlinds(score)*multiplicatn);
   }
 
   static showdown(gameState) {
